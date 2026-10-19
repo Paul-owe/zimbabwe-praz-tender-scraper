@@ -1,19 +1,20 @@
 {
-  "actorSpecification": 1,
-  "name": "zimbabwe-praz-tender-scraper",
-  "title": "Zimbabwe PRAZ Tender Scraper & Bid Intelligence",
-  "version": "0.1",
-  "buildTag": "latest",
-  "meta": {
-    "templateId": "js-crawlee-playwright-chrome"
-  },
-  "dockerfile": "../Dockerfile",
-  "readme": "../README.md",
-  "input": "./input_schema.json",
-  "output": "./output_schema.json",
-  "storages": {
-    "dataset": "./dataset_schema.json"
-  },
-  "minMemoryMbytes": 1024,
-  "maxMemoryMbytes": 4096
+    "actorSpecification": 1,
+    "name": "zimbabwe-praz-tender-scraper",
+    "title": "Zimbabwe PRAZ Tender Scraper & Bid Intelligence",
+    "version": "0.4.0",
+    "buildTag": "latest",
+    "meta": {
+        "templateId": "js-crawlee-playwright-chrome",
+        "generatedBy": "Codex with GPT-5"
+    },
+    "dockerfile": "../Dockerfile",
+    "readme": "../README.md",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "minMemoryMbytes": 1024,
+    "maxMemoryMbytes": 4096
 }

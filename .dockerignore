@@ -12,6 +12,7 @@ storage
 
 # installed files
 node_modules
+.backup-before-v0.4
 
 # git folder
 .git

@@ -1,25 +1,37 @@
 {
-  "actorOutputSchemaVersion": 1,
-  "title": "Zimbabwe PRAZ Tender Scraper Output",
-  "description": "Output links for structured Zimbabwe PRAZ eGP tender results and run summary.",
-  "properties": {
-    "tenderResults": {
-      "type": "string",
-      "title": "Tender Results",
-      "description": "Structured public tender records extracted from the PRAZ eGP bulletin board.",
-      "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
-    },
-    "bidDetails": {
-      "type": "string",
-      "title": "Bid Details",
-      "description": "Bid-related tender fields including bid form fee, bid security information, procurement class, and delivery location.",
-      "template": "{{links.apiDefaultDatasetUrl}}/items?view=bidDetails"
-    },
-    "runSummary": {
-      "type": "string",
-      "title": "Run Summary",
-      "description": "Summary of the Actor run, including total saved tenders and scrape timestamp.",
-      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT"
+    "actorOutputSchemaVersion": 1,
+    "title": "Zimbabwe PRAZ Tender Scraper Output",
+    "description": "Structured tender data and operational run summary.",
+    "properties": {
+        "tenderResults": {
+            "type": "string",
+            "title": "Tender Overview",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+        },
+        "bidDetails": {
+            "type": "string",
+            "title": "Bid Details",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=bidDetails"
+        },
+        "requirements": {
+            "type": "string",
+            "title": "Tender Requirements",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=requirements"
+        },
+        "opportunity": {
+            "type": "string",
+            "title": "Opportunity Intelligence",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=opportunity"
+        },
+        "alerts": {
+            "type": "string",
+            "title": "Monitoring & Alerts",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=alerts"
+        },
+        "runSummary": {
+            "type": "string",
+            "title": "Run Summary",
+            "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT"
+        }
     }
-  }
 }

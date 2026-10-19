@@ -1,184 +1,104 @@
 # Zimbabwe PRAZ Tender Scraper & Bid Intelligence
 
-Extract public tender opportunities from Zimbabwe's PRAZ eGP bulletin board.
+## What does Zimbabwe PRAZ Tender Scraper do?
 
-## What this Actor does
+**Zimbabwe PRAZ Tender Scraper** collects publicly accessible procurement opportunities from the [PRAZ eGP bulletin board](https://egp.praz.org.zw/Indexes/index). It reads tender listing rows, optionally opens each detail page, normalizes Zimbabwe closing dates, extracts evidence-backed requirement signals, and produces alert-ready records for procurement teams. It does not log in, submit bids, bypass access controls, or send email automatically.
 
-This Actor scrapes public tender records from the Zimbabwe electronic Government Procurement system and returns clean structured data for procurement monitoring, supplier lead generation, tender alerts, and market research.
+Run it manually, through the Apify API, or on a Task/Schedule. Apify provides API access, dataset downloads, scheduling, monitoring, proxy and integration options, so the results can feed a dashboard or an external workflow.
 
-## Output includes
+## Why use this Actor?
 
-- Tender ID
-- Tender reference number
-- Tender title
-- Procuring entity / buyer
-- Supplier category
-- Tender status
-- Publish date
-- Closing date
-- Days remaining
-- Procurement method
-- Class of procurement
-- Delivery/project location
-- Bid form fee
-- Bid security information
-- Public document links where available
-- Direct source URL
-- Short tender summary
+- Find public Zimbabwe tenders by buyer, category, status, procurement method, or keyword.
+- Track new tenders and meaningful updates across repeated runs.
+- Prioritize opportunities with separate, explainable opportunity and preparation-risk scores.
+- Prepare suppliers with a checklist based only on requirements found in the public source.
+- Connect dataset output to Google Sheets, Slack, Make, Zapier, webhooks, or a procurement system.
 
-## Use cases
+## How to use Zimbabwe PRAZ Tender Scraper
 
-- Tender alert businesses
-- Procurement consultants
-- Construction suppliers
-- ICT suppliers
-- Medical suppliers
-- Cleaning and security companies
-- NGOs and donor-funded procurement teams
-- Companies tracking Zimbabwe government opportunities
+1. Open the Actor in Apify Console.
+2. Start with `maxItems`, `maxPages`, `includeDetails: true`, and `analyzeDocuments: false`.
+3. Add buyer/category/keyword filters if required.
+4. Click **Start** and inspect the Dataset views: Tender Overview, Bid Details, Tender Requirements, Opportunity Intelligence, and Monitoring & Alerts.
+5. For automation, create an Apify Task with the saved input and attach it to a Schedule.
 
-## Input options
+## Input
 
-- `startUrl` - PRAZ bulletin board URL
-- `maxItems` - Maximum number of tenders to scrape
-- `keyword` - Optional search filter, for example construction, medical, ICT, ZETDC
-- `onlyOpen` - Return only open/active tenders
+The Input tab contains the complete schema. Important fields include `startUrl`, `maxItems`, `maxPages`, `includeDetails`, `keyword`, `buyerKeyword`, `categoryKeyword`, `statusKeyword`, `procurementMethodKeyword`, `classOfProcurementKeyword`, `businessCategory`, `onlyOpen`, `minimumDaysRemaining`, and `maximumDaysRemaining`.
 
-## Example output
+Monitoring uses `newOnly`, `detectChanges`, `includeStatusChanges`, and an explicit `stateStoreId`. `newOnly` requires `stateStoreId`; this prevents unrelated public users from sharing one default history. `detectChanges` compares status, closing date, and a material tender fingerprint. A new tender is `NEW_TENDER`; a status change is `STATUS_CHANGED`; a closing-date change is `CLOSING_DATE_CHANGED`; another material change is `TENDER_UPDATED`; unchanged records are `NONE`.
+
+Requirement extraction is enabled with `extractRequirements`. Public PDF analysis is opt-in with `analyzeDocuments`, `maxDocumentsPerTender`, and `maxDocumentSizeMB`. PDF analysis only follows trusted HTTPS PRAZ links and continues if one document fails.
+
+## Output
+
+Each dataset item retains the original source fields and adds normalized dates, requirements, bid-security fields, site-visit detection, readiness checklist, scores, and alert fields.
 
 ```json
 {
-  "country": "Zimbabwe",
-  "source": "PRAZ eGP",# Zimbabwe PRAZ Tender Scraper & Bid Intelligence
-
-Extract structured public tender opportunities from Zimbabwe's PRAZ eGP bulletin board.
-
-This Actor is built for procurement monitoring, tender lead generation, market research, supplier opportunity tracking, and public procurement intelligence.
-
-## Version 0.4 features
-
-### Version 0.2 foundations
-
-- Scrape multiple bulletin board pages
-- Visit tender detail pages for enriched procurement data
-- Filter by keyword, buyer, category, status, procurement method, class of procurement, and business category
-- Filter by minimum or maximum days remaining
-- Return only open/active tenders
-- Generate business categories such as Construction, ICT, Medical, Energy, Security, Cleaning, Vehicles, Consulting, and Other
-- Generate opportunity score and rating
-- Clean document links by removing global site documents
-- Add CSV/Excel-friendly document URL and title fields
-
-### Version 0.3 daily-monitoring features
-
-- `newOnly` mode for returning only tenders not seen in previous runs
-- Persistent tender memory using a named Apify key-value store
-- Status-change alert detection
-- Alert-ready fields: `isNew`, `firstSeenAt`, `lastSeenAt`, `previousStatus`, `statusChanged`, and `alertReason`
-- Better support for daily/weekly scheduled monitoring tasks
-
-### Version 0.4 intelligence features
-
-- Requirement signal extraction from detail pages
-- Optional public PDF text extraction with `analyzeDocuments`
-- Eligibility, mandatory, submission, financial, and technical requirement signals
-- Bid security detection
-- Site visit detection
-- Risk score and risk level
-- Tender document summary
-- Supplier readiness checklist
-
-## Recommended input
-
-```json
-{
-  "startUrl": "https://egp.praz.org.zw/Indexes/index",
-  "maxItems": 50,
-  "maxPages": 3,
-  "includeDetails": true,
-  "keyword": "",
-  "buyerKeyword": "",
-  "categoryKeyword": "",
-  "onlyOpen": true,
-  "minimumDaysRemaining": 7,
-  "newOnly": false,
-  "extractRequirements": true,
-  "analyzeDocuments": false
+    "tenderId": "39797",
+    "title": "Construction of a 40km, 132kV Double Lynx line",
+    "buyer": "ZIMBABWE ELECTRICITY TRANSMISSION AND DISTRIBUTION COMPANY",
+    "status": "Open",
+    "closingDate": "10-Jul-2026 10:00 AM",
+    "closingDateIso": "2026-07-10T08:00:00.000Z",
+    "isNew": true,
+    "alertReason": "NEW_TENDER",
+    "opportunityScore": 75,
+    "riskScore": 35,
+    "sourceUrl": "https://egp.praz.org.zw/Indexes/viewLiveTenderDetails/39797"
 }
 ```
 
-## Daily alert input
+You can download the dataset in various formats such as JSON, HTML, CSV, or Excel.
 
-```json
-{
-  "startUrl": "https://egp.praz.org.zw/Indexes/index",
-  "maxItems": 100,
-  "maxPages": 5,
-  "includeDetails": true,
-  "onlyOpen": true,
-  "newOnly": true,
-  "memoryStoreName": "praz-tender-memory",
-  "extractRequirements": true,
-  "analyzeDocuments": false
-}
-```
+## Data table
 
-## PDF analysis input
+| Field                                                         | Meaning                                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `tenderId`                                                    | Stable PRAZ tender identifier used for deduplication and monitoring       |
+| `title`, `buyer`, `category`, `status`                        | Public tender listing information                                         |
+| `publishDateIso`, `closingDateIso`, `daysRemaining`           | Normalized dates using Zimbabwe time (Africa/Harare)                      |
+| `bidSecurityRequired`, `bidSecurityAmount`, `bidSecurityType` | Explicitly detected bid-security facts, or `null` when unknown            |
+| `mandatoryRequirements` to `technicalRequirements`            | Backward-compatible requirement text arrays                               |
+| `*RequirementEvidence`                                        | Parallel evidence objects with source type, URL, evidence, and confidence |
+| `riskFactors`, `opportunityFactors`                           | Explanations behind bounded scores from 0 to 100                          |
+| `readinessChecklist`                                          | Preparation items; `completed` is always false without user confirmation  |
+| `alertType`, `alertMessage`, `alertPriority`                  | Fields ready for external notification workflows                          |
 
-Use this only when you need public PDF requirement extraction, because it can increase runtime and platform cost.
+## How much does it cost to scrape PRAZ data?
 
-```json
-{
-  "startUrl": "https://egp.praz.org.zw/Indexes/index",
-  "maxItems": 20,
-  "maxPages": 1,
-  "includeDetails": true,
-  "extractRequirements": true,
-  "analyzeDocuments": true,
-  "maxDocumentsPerTender": 2,
-  "maxPdfBytes": 2000000
-}
-```
+The Actor preserves the existing Pay Per Event dataset-item pricing compatibility. Apify charges for records written to the default Dataset; filtered or deduplicated records are not written. Runtime cost depends mainly on detail-page count, browser memory, concurrency, and optional PDF analysis. Keep `analyzeDocuments` disabled for daily discovery and enable it for a smaller, targeted run. Review the Actor's current Apify Console pricing and spending limits before production scheduling.
 
-## Output includes
+## Persistent monitoring and scheduled runs
 
-- Tender ID
-- Tender reference number
-- Tender title
-- Procuring entity / buyer
-- Supplier category
-- Business category
-- Status, publish date, closing date, and days remaining
-- Procurement method
-- Class of procurement
-- Delivery/project location
-- Bid form fee
-- Bid security fields
-- Bid security required detection
-- Public document links where available
-- Document count and document summary
-- Requirement signals
-- Site visit detection
-- Risk score and risk level
-- Opportunity score and rating
-- Readiness checklist
-- New tender / status-change alert fields
-- Direct source URL
-- Short summary
+Create one user-owned Apify Key-Value Store per customer, business unit, or monitoring task and place its ID/name in `stateStoreId`. Do not use one shared store for unrelated customers. Then create an Apify Task with `newOnly: true`, `detectChanges: true`, and `includeStatusChanges: true`. Suggested Task names are **Daily Open Tender Monitor**, **Weekly Construction Tender Monitor**, **Daily ICT Procurement Monitor**, **ZETDC Tender Monitor**, **New Tender Alerts**, and **Tender Status Change Monitor**. Attach the Task to an Apify Schedule; no background scheduler runs inside the Actor.
 
-## Limitations
+Use one scheduled monitoring Task per state store and avoid overlapping runs. The Actor writes state only after a successful Dataset write and merges newer remote records when persisting, which reduces last-writer-wins loss during operational retries.
 
-This Actor extracts publicly available tender information only. It does not log in, bypass access controls, submit bids, or access private supplier/bidder information.
+The first run emits unseen tenders. A later run suppresses unchanged tenders in `newOnly` mode and can emit meaningful updates. If no `stateStoreId` is supplied, cross-run monitoring is disabled and the Actor reports that fact in `OUTPUT`.
 
-Public PDF extraction only works when a tender document link is publicly downloadable and readable as a PDF.
+## Integrations
 
-  "tenderId": "39797",
-  "tenderReferenceNumber": "ZETDC/INTER/22/2025",
-  "title": "Construction of a 40km, 132kV Double Lynx line",
-  "buyer": "ZIMBABWE ELECTRICITY TRANSMISSION AND DISTRIBUTION COMPANY",
-  "status": "Open",
-  "closingDate": "10-Jul-2026 10:00 AM",
-  "procurementMethod": "Competitive Bidding Method",
-  "classOfProcurement": "Work (Non Complex Works)",
-  "sourceUrl": "https://egp.praz.org.zw/Indexes/viewLiveTenderDetails/39797"
-}
+- **Google Sheets:** connect the default Dataset through Apify's Dataset export/API or an automation connector.
+- **Slack:** trigger on `alertType != NONE` and post `alertTitle`, `alertMessage`, `sourceUrl`, and `closingDate`.
+- **Make/Zapier:** poll the Dataset API or use a webhook after an Apify run completes, then filter on `isNew` or `hasChanges`.
+- **Webhooks/REST:** use the Dataset API and the `OUTPUT` key-value record for run counters and errors.
+
+## Document analysis and limitations
+
+PDF analysis is deterministic text extraction, not an AI opinion or legal review. A missing public document does not prove that a tender has no requirements. The Actor does not access authentication-protected files, bypass CAPTCHA, or download arbitrary hosts. Scoring is preparation guidance, not a probability of winning or a compliance certification. Public pages can change layout, contain incomplete data, or mark an expired tender as Open; normalized dates and scoring expose that uncertainty.
+
+## FAQ, disclaimers, and support
+
+**Why is a field `null`?** The public source did not explicitly support that fact. Unknown is kept separate from zero or false.
+
+**Why did a tender not appear?** Check filters, `maxItems`, `maxPages`, status, detail-only filters, and whether `newOnly` suppressed an unchanged record.
+
+**Can the Actor submit a bid?** No. It is a public-information scraper only. Follow applicable law, PRAZ terms, robots guidance, and website usage limits.
+
+For layout changes or feature requests, use the Actor's Issues tab. Custom extraction, integrations, and private workflows can be built as a separate solution.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for the v0.2 to v0.4 history and known limitations.
