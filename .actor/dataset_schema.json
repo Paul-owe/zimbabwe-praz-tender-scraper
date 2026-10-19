@@ -1,0 +1,429 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "title": "Zimbabwe PRAZ tender item",
+    "type": "object",
+    "properties": {
+      "country": {
+        "type": "string",
+        "title": "Country"
+      },
+      "source": {
+        "type": "string",
+        "title": "Source"
+      },
+      "tenderId": {
+        "type": "string",
+        "title": "Tender ID"
+      },
+      "tenderReferenceNumber": {
+        "type": "string",
+        "title": "Tender Reference Number"
+      },
+      "title": {
+        "type": "string",
+        "title": "Tender Title"
+      },
+      "categoryCode": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Category Code"
+      },
+      "category": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Category"
+      },
+      "businessCategory": {
+        "type": "string",
+        "title": "Business Category"
+      },
+      "buyer": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Buyer"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Status"
+      },
+      "publishDate": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Publish Date"
+      },
+      "publishDateIso": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Publish Date ISO"
+      },
+      "closingDate": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Closing Date"
+      },
+      "closingDateIso": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Closing Date ISO"
+      },
+      "daysRemaining": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "title": "Days Remaining"
+      },
+      "procurementMethod": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Procurement Method"
+      },
+      "classOfProcurement": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Class of Procurement"
+      },
+      "deliveryLocation": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Delivery Location"
+      },
+      "bidFormFee": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Bid Form Fee"
+      },
+      "bidSecurityAmountDomestic": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Domestic Bid Security"
+      },
+      "bidSecurityAmountInternational": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "International Bid Security"
+      },
+      "bidSecurityRequired": {
+        "type": "boolean",
+        "title": "Bid Security Required"
+      },
+      "documentLinks": {
+        "type": "array",
+        "title": "Document Links",
+        "items": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "href": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "hasPublicDocuments": {
+        "type": "boolean",
+        "title": "Has Public Documents"
+      },
+      "documentCount": {
+        "type": "integer",
+        "title": "Document Count"
+      },
+      "documentUrls": {
+        "type": "string",
+        "title": "Document URLs"
+      },
+      "documentTitles": {
+        "type": "string",
+        "title": "Document Titles"
+      },
+      "documentAnalysisStatus": {
+        "type": "string",
+        "title": "Document Analysis Status"
+      },
+      "documentTextExtracted": {
+        "type": "boolean",
+        "title": "Document Text Extracted"
+      },
+      "documentAnalysisNotes": {
+        "type": "array",
+        "title": "Document Analysis Notes",
+        "items": {
+          "type": "string"
+        }
+      },
+      "tenderDocumentSummary": {
+        "type": "string",
+        "title": "Tender Document Summary"
+      },
+      "mandatoryRequirements": {
+        "type": "array",
+        "title": "Mandatory Requirements",
+        "items": {
+          "type": "string"
+        }
+      },
+      "eligibilityRequirements": {
+        "type": "array",
+        "title": "Eligibility Requirements",
+        "items": {
+          "type": "string"
+        }
+      },
+      "submissionRequirements": {
+        "type": "array",
+        "title": "Submission Requirements",
+        "items": {
+          "type": "string"
+        }
+      },
+      "financialRequirements": {
+        "type": "array",
+        "title": "Financial Requirements",
+        "items": {
+          "type": "string"
+        }
+      },
+      "technicalRequirements": {
+        "type": "array",
+        "title": "Technical Requirements",
+        "items": {
+          "type": "string"
+        }
+      },
+      "siteVisitRequired": {
+        "type": "boolean",
+        "title": "Site Visit Required"
+      },
+      "requirementCount": {
+        "type": "integer",
+        "title": "Requirement Count"
+      },
+      "opportunityScore": {
+        "type": "integer",
+        "title": "Opportunity Score"
+      },
+      "opportunityRating": {
+        "type": "string",
+        "title": "Opportunity Rating"
+      },
+      "riskScore": {
+        "type": "integer",
+        "title": "Risk Score"
+      },
+      "riskLevel": {
+        "type": "string",
+        "title": "Risk Level"
+      },
+      "readinessChecklist": {
+        "type": "array",
+        "title": "Readiness Checklist",
+        "items": {
+          "type": "string"
+        }
+      },
+      "isNew": {
+        "type": "boolean",
+        "title": "Is New"
+      },
+      "firstSeenAt": {
+        "type": "string",
+        "title": "First Seen At"
+      },
+      "lastSeenAt": {
+        "type": "string",
+        "title": "Last Seen At"
+      },
+      "previousStatus": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "title": "Previous Status"
+      },
+      "statusChanged": {
+        "type": "boolean",
+        "title": "Status Changed"
+      },
+      "alertReason": {
+        "type": "string",
+        "title": "Alert Reason"
+      },
+      "summary": {
+        "type": "string",
+        "title": "Summary"
+      },
+      "sourceUrl": {
+        "type": "string",
+        "title": "Source URL"
+      },
+      "scrapedAt": {
+        "type": "string",
+        "title": "Scraped At"
+      }
+    },
+    "required": [
+      "country",
+      "source",
+      "tenderId",
+      "title",
+      "sourceUrl",
+      "scrapedAt"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Tender Intelligence Overview",
+      "transformation": {
+        "fields": [
+          "opportunityRating",
+          "opportunityScore",
+          "riskLevel",
+          "riskScore",
+          "isNew",
+          "alertReason",
+          "status",
+          "daysRemaining",
+          "businessCategory",
+          "tenderId",
+          "tenderReferenceNumber",
+          "title",
+          "buyer",
+          "category",
+          "closingDate",
+          "procurementMethod",
+          "documentCount",
+          "sourceUrl"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "sourceUrl": {
+            "label": "Tender URL",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "requirements": {
+      "title": "Requirements & Risk",
+      "transformation": {
+        "fields": [
+          "tenderId",
+          "title",
+          "bidSecurityRequired",
+          "siteVisitRequired",
+          "requirementCount",
+          "mandatoryRequirements",
+          "eligibilityRequirements",
+          "financialRequirements",
+          "technicalRequirements",
+          "readinessChecklist",
+          "sourceUrl"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "sourceUrl": {
+            "label": "Tender URL",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "documents": {
+      "title": "Documents",
+      "transformation": {
+        "fields": [
+          "tenderId",
+          "title",
+          "hasPublicDocuments",
+          "documentCount",
+          "documentAnalysisStatus",
+          "documentTextExtracted",
+          "tenderDocumentSummary",
+          "documentUrls",
+          "sourceUrl"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "sourceUrl": {
+            "label": "Tender URL",
+            "format": "link"
+          },
+          "documentUrls": {
+            "label": "Document URLs",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "alerts": {
+      "title": "New Tender Alerts",
+      "transformation": {
+        "fields": [
+          "isNew",
+          "statusChanged",
+          "alertReason",
+          "firstSeenAt",
+          "lastSeenAt",
+          "previousStatus",
+          "status",
+          "tenderId",
+          "tenderReferenceNumber",
+          "title",
+          "buyer",
+          "closingDate",
+          "sourceUrl"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "sourceUrl": {
+            "label": "Tender URL",
+            "format": "link"
+          }
+        }
+      }
+    }
+  }
+}

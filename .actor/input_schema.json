@@ -1,0 +1,177 @@
+{
+  "title": "Zimbabwe PRAZ Tender Scraper Input",
+  "description": "Scrape public tender opportunities from Zimbabwe's PRAZ eGP bulletin board with pagination, filters, new-tender detection, opportunity scoring, risk scoring, and optional public PDF requirement extraction.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrl": {
+      "title": "Start URL",
+      "type": "string",
+      "description": "The PRAZ eGP bulletin board URL to scrape. Leave the default unless PRAZ changes its public bulletin board route.",
+      "editor": "textfield",
+      "default": "https://egp.praz.org.zw/Indexes/index",
+      "prefill": "https://egp.praz.org.zw/Indexes/index"
+    },
+    "maxItems": {
+      "title": "Maximum tenders",
+      "type": "integer",
+      "description": "Maximum number of tender records to save.",
+      "default": 50,
+      "prefill": 20,
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "maxPages": {
+      "title": "Maximum pages",
+      "type": "integer",
+      "description": "Maximum number of bulletin board pages to scrape.",
+      "default": 1,
+      "prefill": 1,
+      "minimum": 1,
+      "maximum": 100
+    },
+    "includeDetails": {
+      "title": "Include tender detail pages",
+      "type": "boolean",
+      "description": "Visit each tender detail page to extract procurement method, class, bid fees, bid security amounts, document links, requirements, and richer scoring.",
+      "default": true
+    },
+    "keyword": {
+      "title": "Keyword filter",
+      "type": "string",
+      "description": "Optional keyword filter. Searches title, reference number, buyer, category, procurement method, location, business category, and extracted requirements.",
+      "editor": "textfield",
+      "default": "",
+      "prefill": "",
+      "example": "construction"
+    },
+    "buyerKeyword": {
+      "title": "Buyer / procuring entity filter",
+      "type": "string",
+      "description": "Filter by buyer or procuring entity, for example ZETDC, POTRAZ, council, ministry.",
+      "editor": "textfield",
+      "default": "",
+      "prefill": ""
+    },
+    "categoryKeyword": {
+      "title": "Category filter",
+      "type": "string",
+      "description": "Filter by supplier category, for example construction, ICT, medical, vehicles, cleaning.",
+      "editor": "textfield",
+      "default": "",
+      "prefill": ""
+    },
+    "statusKeyword": {
+      "title": "Status filter",
+      "type": "string",
+      "description": "Optional status filter, for example Open.",
+      "editor": "textfield",
+      "default": "",
+      "prefill": ""
+    },
+    "procurementMethodKeyword": {
+      "title": "Procurement method filter",
+      "type": "string",
+      "description": "Filter by procurement method, for example competitive bidding.",
+      "editor": "textfield",
+      "default": "",
+      "prefill": ""
+    },
+    "classOfProcurementKeyword": {
+      "title": "Class of procurement filter",
+      "type": "string",
+      "description": "Filter by class of procurement, for example Works, Goods, Services.",
+      "editor": "textfield",
+      "default": "",
+      "prefill": ""
+    },
+    "businessCategory": {
+      "title": "Business category filter",
+      "type": "string",
+      "description": "Filter by generated business category, for example Construction, ICT, Medical, Energy, Security, Cleaning, Vehicles, Consulting.",
+      "editor": "textfield",
+      "default": "",
+      "prefill": ""
+    },
+    "onlyOpen": {
+      "title": "Only open tenders",
+      "type": "boolean",
+      "description": "If enabled, the Actor only returns tenders with active/open-type statuses.",
+      "default": false
+    },
+    "minimumDaysRemaining": {
+      "title": "Minimum days remaining",
+      "type": "integer",
+      "description": "Return only tenders with at least this many days remaining before closing. Use 0 to disable.",
+      "default": 0,
+      "minimum": 0
+    },
+    "maximumDaysRemaining": {
+      "title": "Maximum days remaining",
+      "type": "integer",
+      "description": "Return only tenders closing within this number of days. Use 0 to disable.",
+      "default": 0,
+      "minimum": 0
+    },
+    "newOnly": {
+      "title": "New tenders only",
+      "type": "boolean",
+      "description": "Return only tender records not previously seen in the selected memory store. Status changes are also returned as alerts.",
+      "default": false
+    },
+    "resetSeenTenders": {
+      "title": "Reset seen-tender memory",
+      "type": "boolean",
+      "description": "Clear the Actor's seen-tender memory before this run. Useful for testing newOnly mode.",
+      "default": false
+    },
+    "memoryStoreName": {
+      "title": "Memory store name",
+      "type": "string",
+      "description": "Named key-value store used to remember previously seen tender IDs across runs.",
+      "editor": "textfield",
+      "default": "praz-tender-memory",
+      "prefill": "praz-tender-memory"
+    },
+    "extractRequirements": {
+      "title": "Extract requirement signals",
+      "type": "boolean",
+      "description": "Extract eligibility, mandatory, financial, submission, and technical requirement signals from the detail page and optional public PDFs.",
+      "default": true
+    },
+    "analyzeDocuments": {
+      "title": "Analyze public PDF documents",
+      "type": "boolean",
+      "description": "Try to download and parse public PDF document links where available. Keep disabled for cheaper/faster runs unless you need PDF requirement extraction.",
+      "default": false
+    },
+    "maxDocumentsPerTender": {
+      "title": "Maximum PDFs per tender",
+      "type": "integer",
+      "description": "Maximum public PDF documents to parse per tender when document analysis is enabled.",
+      "default": 2,
+      "minimum": 0,
+      "maximum": 10
+    },
+    "maxPdfBytes": {
+      "title": "Maximum PDF size in bytes",
+      "type": "integer",
+      "description": "Skip PDF documents larger than this limit to control costs and runtime.",
+      "default": 2000000,
+      "minimum": 100000,
+      "maximum": 15000000
+    },
+    "documentTextMaxChars": {
+      "title": "Maximum extracted PDF text characters",
+      "type": "integer",
+      "description": "Maximum characters of PDF text to keep per tender for requirement extraction.",
+      "default": 12000,
+      "minimum": 1000,
+      "maximum": 100000
+    }
+  },
+  "required": [
+    "startUrl",
+    "maxItems"
+  ]
+}
